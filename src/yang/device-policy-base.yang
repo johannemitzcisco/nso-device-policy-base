@@ -1,0 +1,268 @@
+module device-policy-base {
+
+  namespace "http://example.com/device-policy-base";
+  prefix dpb;
+
+  import topology-policy-base {
+    prefix tpb;
+  }
+  import network-policy-base {
+    prefix npb;
+  }
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  description
+    "This is an add on model to the network-policy-base package/service";
+
+  revision 2017-11-28 {
+    description
+      "Initial revision.";
+  }
+
+  grouping common-policy-definitions-grouping {
+   list cdp {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list callhome {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list line {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list telnet {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list lldp {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list ospf {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+  }
+
+  augment /npb:network/npb:network-service/tpb:topology/tpb:policies {
+    list cdp {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:topology/cdp/name";
+        }
+      }
+    }
+    list callhome {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:topology/callhome/name";
+        }
+      }
+    }
+    list line {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:topology/line/name";
+        }
+      }
+    }
+    list telnet {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:topology/telnet/name";
+        }
+      }
+    }
+    list lldp {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:topology/lldp/name";
+        }
+      }
+    }
+    list ospf {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:topology/ospf/name";
+        }
+      }
+    }
+  }
+
+  augment /npb:network/npb:network-service/tpb:topology/tpb:endpoint/tpb:policies {
+    list hostname {  // This is the name (identifier) of the device in NSO
+      max-elements 1;
+//      min-elements 1;
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/hostname/name";
+        }
+      }
+      leaf hostname {
+        type string;
+      }
+    }
+    list cdp {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/cdp/name";
+        }
+      }
+    }
+    list callhome {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/callhome/name";
+        }
+      }
+    }
+    list line {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/line/name";
+        }
+      }
+    }
+    list telnet {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/telnet/name";
+        }
+      }
+    }
+    list loopback {
+      key "policy-name interface-number";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/loopback/name";
+        }
+      }
+      leaf interface-number {
+        type uint8;
+      }
+      leaf ip-address {
+        type inet:ipv4-address;
+      }
+      leaf prefix-sid {
+        type uint32;
+      }
+    }
+    list lldp {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/lldp/name";
+        }
+      }
+    }
+    list static-route {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/static-route/name";
+        }
+      }
+      leaf network {
+        type inet:ipv4-prefix;
+      }
+      leaf ip-address {
+        type inet:ipv4-address;
+      }
+    }
+    list ospf {
+      key "policy-name";
+      leaf policy-name {
+        type leafref {
+          path "/npb:network/npb:policy-definitions/tpb:endpoint/ospf/name";
+        }
+      }
+    }
+  }
+
+  augment /npb:network/npb:policy-definitions/tpb:endpoint {
+    uses common-policy-definitions-grouping;
+    list hostname {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list loopback {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+    list static-route {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf template {
+        type string;
+      }
+    }
+  }
+
+  augment /npb:network/npb:policy-definitions/tpb:topology {
+    uses common-policy-definitions-grouping;
+
+  }
+}
