@@ -1,0 +1,36 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+    <name>{$DEVICE-NAME}</name>
+      <config>
+      <line xmlns="http://tail-f.com/ned/cisco-ios-xr">
+        <default>
+          <timeout>
+            <login>
+              <response>30</response>
+            </login>
+          </timeout>
+          <exec-timeout>
+            <minutes>0</minutes>
+            <seconds>0</seconds>
+          </exec-timeout>
+          <session-limit>20</session-limit>
+          <telnet>
+            <transparent/>
+          </telnet>
+          <session-timeout>
+            <minutes>0</minutes>
+          </session-timeout>
+        </default>
+        <template>
+          <name>vty</name>
+          <exec-timeout>
+            <minutes>0</minutes>
+            <seconds>0</seconds>
+          </exec-timeout>
+        </template>
+      </line>
+      </config>
+  </device>
+  </devices>
+</config>

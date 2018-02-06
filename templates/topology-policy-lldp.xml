@@ -1,0 +1,11 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+    <name>{$DEVICE-NAME}</name>
+      <config>
+      <lldp xmlns="http://tail-f.com/ned/cisco-ios-xr">
+      </lldp>
+      </config>
+  </device>
+  </devices>
+</config>

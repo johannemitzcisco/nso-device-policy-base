@@ -1,0 +1,20 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+    <name>{$DEVICE-NAME}</name>
+      <config>
+      <telnet xmlns="http://tail-f.com/ned/cisco-ios-xr">
+        <vrf>
+          <name>default</name>
+          <telnet-server-list>
+            <af>ipv4</af>
+            <server>
+              <max-servers>10</max-servers>
+            </server>
+          </telnet-server-list>
+        </vrf>
+      </telnet>
+      </config>
+  </device>
+  </devices>
+</config>

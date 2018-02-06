@@ -1,0 +1,31 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+    <name>{$DEVICE-NAME}</name>
+      <config>
+      <cdp xmlns="http://tail-f.com/ned/cisco-ios-xr">
+      </cdp>
+      <interface xmlns="http://tail-f.com/ned/cisco-ios-xr">
+      <TenGigE foreach="{ncs:device[ncs:name='asr-nyc']/ncs:config/cisco-ios-xr:interface/TenGigE}">
+        <id>{current()/id}</id>
+          <cdp/>
+      </TenGigE>
+      <FortyGigE foreach="{device[name=$DEVICE-NAME]/config/cisco-ios-xr:interface/FortyGigE}">
+        <id>{current()/id}</id>
+          <cdp/>
+      </FortyGigE>
+      <HundredGigE foreach="{device[name=$DEVICE-NAME]/config/cisco-ios-xr:interface/HundredGigE}">
+        <id>{current()/id}</id>
+          <cdp/>
+      </HundredGigE>
+      <preconfigure>
+          <HundredGigE foreach="{device[name=$DEVICE-NAME]/config/cisco-ios-xr:interface/preconfigure/HundredGigE}">
+            <id>{current()/id}</id>
+            <cdp/>
+          </HundredGigE>
+      </preconfigure>
+      </interface>
+      </config>
+  </device>
+  </devices>
+</config>

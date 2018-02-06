@@ -1,0 +1,35 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+    <name>{$DEVICE-NAME}</name>
+      <config>
+        <interface xmlns="http://tail-f.com/ned/cisco-ios-xr">
+          <Loopback foreach="{/network-service[name=$SERVICE-NAME]/topology/endpoint[topology-name=$DEVICE-TOPOLOGY-NAME]/policies/loopback[policy-name=$POLICY-NAME]}">
+            <id>{interface-number}</id>
+            <description>{$DEVICE-NAME} Loopback {interface-number} Interface</description>
+            <ipv4>
+              <address>
+                <ip>{ip-address}</ip>
+                <mask>255.255.255.255</mask>
+              </address>
+            </ipv4>
+          </Loopback>
+        </interface>
+        <!-- interface xmlns="http://tail-f.com/ned/cisco-ios">
+          <Loopback foreach="{/network-service[name=$SERVICE-NAME]/topology/endpoint[topology-name=$DEVICE-TOPOLOGY-NAME]/policies/loopback[policy-name=$POLICY-NAME]}">
+            <name>{interface-number}</name>
+            <description>{$DEVICE-NAME} Loopback {interface-number} Interface</description>
+            <ip>
+              <address>
+                <primary>
+                  <address>{ip-address}</address>
+                  <mask>255.255.255.255</mask>
+                </primary>
+              </address>
+            </ip>
+          </Loopback>
+        </interface -->
+      </config>
+  </device>
+  </devices>
+</config-template>
