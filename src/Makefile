@@ -12,9 +12,9 @@ FXS = $(SRC:yang/%.yang=../load-dir/%.fxs)
 ## or to other YANG files
 # YANGPATH += ../../<ned-name>/src/ncsc-out/modules/yang \
 # 	../../<pkt-name>/src/yang
-YANGPATH += ../../network-policy-base/src/yang
-YANGPATH += ../../topology-policy-base/src/yang
-YANGPATH += ../../physical-device-policy-base/src/yang
+YANGPATH += ../../nso-network-policy-base/src/yang
+YANGPATH += ../../nso-topology-policy-base/src/yang
+#YANGPATH += ../../physical-device-policy-base/src/yang
 
 NCSCPATH   = $(YANGPATH:%=--yangpath %)
 YANGERPATH = $(YANGPATH:%=--path %)
